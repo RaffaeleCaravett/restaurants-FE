@@ -1,1 +1,58 @@
-<p>home works!</p>
+<div class="container text-center py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Welcome to OrdersApp</h1>
+    <p>The n°1 company for delivery.</p>
+    </div>
+<div class="col-md-12 py-5">
+  <div class="row">
+  <div class="col-md-4">
+<div class="p-3 bg-light border rounded w-75 m-auto upper">
+  <h2>Lorem ipsum</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+<div class=" bg-warning border rounded w-100 lower">
+  <img src="../../../assets/home/food-delivery.jpg"  alt="">
+</div>
+</div>
+<div class="col-md-4">
+<div class="p-3 bg-light border rounded w-75 m-auto upper">
+  <h2>Lorem ipsum</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+</div>
+<div class=" bg-warning border rounded w-100 lower">
+  <img src="../../../assets/home/food-delivery.jpg"  alt="">
+</div>
+</div>
+<div class="col-md-4">
+<div class="p-3 bg-light border rounded w-75 m-auto upper">
+  <h2>Lorem ipsum</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+</div>
+<div class=" bg-warning border rounded w-100 lower">
+  <img src="../../../assets/home/food-delivery.jpg"  alt="">
+</div>
+</div>
+  </div>
+</div>
+<div class="col-md-6 py-5" data-aos="zoom-in" data-aos-duration="3000">
+ <h2>We take trace of your earnings</h2>
+ <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+</div>
+<div class="col-md-6 py-5" data-aos="zoom-in" data-aos-duration="3000">
+<h2>Large portfolio of users</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+</div>
+<div class="col-md-12 py-5">
+  <div class="row">
+    <div class="col-md-3 p-2" *ngFor="let c of images,index as i" (mousemove)="hoverCard(c,i,$event)" (mouseout)="xDeg=0;yDeg=0">
+<div class="w-100 p-2 rounded bg-success" id="card{{i}}" >
+    <div class="border border-danger rounded">
+      <img src="{{c}}"  class="w-100 rounded"/>
+            </div>
+  </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
