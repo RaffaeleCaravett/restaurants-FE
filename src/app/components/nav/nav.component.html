@@ -5,7 +5,7 @@
 <p [routerLink]="'/'">Home</p>
       </div>
       <div class="col-md-4">
-<p [routerLink]="'/office'">Office</p>
+<p [routerLink]="'/office'" *ngIf="isAuthenticated">Office</p>
       </div>
       <div class="col-md-4">
 <p [routerLink]="'/forms'">Login/Signup</p>
