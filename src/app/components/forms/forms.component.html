@@ -1,1 +1,57 @@
-<p>forms works!</p>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-md-12 py-5">
+      <h1>Forms section</h1>
+    <p class="fs-5">{{section}}</p>
+    </div>
+    <div class="col-md-12 py-5">
+      <div *ngIf="section=='Login'" class="col-md-6 m-auto">
+        <form [formGroup]="loginForm" class="p-4">
+    <label for="" class="py-4 fs-3 fw-bold">Email</label>
+    <input type="text" class="form-control bg-transparent m-auto" formControlName="email">
+    <label for="" class="py-4 fs-3 fw-bold">Password</label>
+    <input type="password" class="form-control bg-transparent m-auto" formControlName="password">
+    <div class="p-2 d-flex justify-content-around">
+    <button class="px-5 py-3 bg-success border" (click)="login()">LOGIN</button>
+</div>
+    </form>
+      </div>
+      <div *ngIf="section=='Signup'"  class="col-md-6 m-auto">
+        <form [formGroup]="signupForm" class="p-4">
+          <div class="row">
+    <div class="col-md-6">
+       <label for="" class="py-4 fs-3 fw-bold">Nome  <span class="fs-6">(min 3)</span></label>
+    <input type="text" class="form-control bg-transparent m-auto" formControlName="nome">
+    </div>
+    <div class="col-md-6">
+    <label for="" class="py-4 fs-3 fw-bold">Cognome  <span class="fs-6">(min 3)</span></label>
+    <input type="text" class="form-control bg-transparent m-auto" formControlName="cognome">
+    </div>
+    <div class="col-md-12">
+      <label for="" class="py-4 fs-3 fw-bold">Email</label>
+    <input type="text" class="form-control bg-transparent m-auto" formControlName="email">
+    </div>
+    <div class="col-md-12">
+      <label for="" class="py-4 fs-3 fw-bold">Età</label>
+    <input type="number" class="form-control bg-transparent m-auto" formControlName="eta">
+    </div>
+    <div class="col-md-6">
+      <label for="" class="py-4 fs-3 fw-bold">Password <span class="fs-6">(min 6)</span></label>
+    <input type="password" class="form-control bg-transparent m-auto" formControlName="password">
+    </div>
+    <div class="col-md-6">
+      <label for="" class="py-4 fs-3 fw-bold">Ripeti<span class="fs-6">(min 6)</span></label>
+    <input type="password" class="form-control bg-transparent m-auto" formControlName="ripetiPassword">
+    </div>
+          </div>
+          <div class="p-2 d-flex justify-content-around">
+            <button class="px-5 py-3 bg-success border" (click)="signup()">SIGNUP</button>
+            </div>
+          </form>    </div>
+    </div>
+    <div class="col-md-12 py-5">
+      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Login'" (click)="section='Signup'">Signup</button>
+      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Signup'" (click)="section='Login'">Login</button>
+    </div>
+  </div>
+</div>

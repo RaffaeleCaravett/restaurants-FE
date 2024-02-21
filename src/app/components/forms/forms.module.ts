@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
 import { FormsComponent } from './forms.component';
 import { FormsRoutingModule } from './forms-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { FormsRoutingModule } from './forms-routing.module';
   ],
   imports: [
     CommonModule,
-    FormsRoutingModule
+    FormsRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
 

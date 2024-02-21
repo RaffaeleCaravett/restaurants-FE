@@ -23,13 +23,13 @@ yDeg:number=0
 xDeg:number=0
 hoverCard(card:any,index:number,event:any){
 if(event.movementX>0){
-  this.xDeg-=0.5
+  this.xDeg-=0.9
 }else if(event.movementX<0){
-  this.xDeg+=0.5
+  this.xDeg+=0.9
 }else if(event.movementY>0){
-  this.yDeg+=0.5
+  this.yDeg+=0.9
 }else{
-  this.yDeg-=0.5
+  this.yDeg-=0.9
 }
 let div = document.getElementById(`card${index}`)
 
@@ -89,6 +89,7 @@ for (let j = 0; j < div.length; j++) {
   let d = div[j] as unknown as HTMLElement
   d.style.right = `${position}px`;
   d.style.zIndex=`${zInde}`
+  d.style.transform=`translateX(${0}px)`
 }
 }
 
