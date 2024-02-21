@@ -9,6 +9,11 @@
     font-weight: 400;
     font-style: normal;
   }
+  h2{
+    font-family: "Tenor Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
   .upper{
     position: relative;
 top:100px;
@@ -49,4 +54,88 @@ box-shadow:
 rgba(red, 0.2) 0 0 40px 5px,
 rgba(black, 0.66) 0 30px 30px 0,
 }
+
+// .div-1{
+//   position: relative;
+//   right: -400px;
+//   z-index:9;
+//   &:hover{
+//     z-index:10;
+//     transition:3s
+//   }
+// }
+// .div-2{
+//   position: relative;
+//   right: -300px;
+//    z-index:8;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-3{
+//   position: relative;
+//   right: -200px;
+//    z-index:7;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-4{
+//   position: relative;
+//   right: -100px;
+//    z-index:6;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-5{
+//   position: relative;
+//    z-index:5;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-6{
+//   position: relative;
+//   right: 100px;
+//    z-index:4;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-7{
+//   position: relative;
+//   right: 200px;
+//    z-index:3;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-8{
+//   position: relative;
+//   right: 300px;
+//    z-index:2;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+// .div-9{
+//   position: relative;
+//   right: 400px;
+//    z-index:1;
+//    &:hover{
+//     z-index:10;
+//     transition:3s
+//    }
+// }
+
+
+
 }

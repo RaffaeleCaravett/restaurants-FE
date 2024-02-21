@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,12 @@ export class HomeComponent implements OnInit{
   image2 = 'https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png'
   image3 = 'https://vuejs.org/images/logo.png'
   image4 = 'https://coryrylan.com/assets/images/posts/types/stenciljs.png'
-images:any[]=[]
+  images:any[]=[]
+  title:string[]=['O','R','D','E','R','S','A','P','P']
    ngOnInit(): void {
 
   this.images = [this.image1, this.image2, this.image3, this.image4];
+  this.getSizes()
   }
 yDeg:number=0
 xDeg:number=0
@@ -33,6 +35,67 @@ if(div!=null){
   div.style.transform = `rotateY(${-this.xDeg}deg) rotateX(${this.yDeg}deg)`;}
 }
 
+
+getSizes(){
+let windowSize= window.innerWidth;
+let position;
+let zInde;
+for(let i = 1 ; i<=9;i++){
+  let div = document.getElementsByClassName(`div-${i}`)
+switch(i){
+ case 1:
+  position = -windowSize /100*24
+  zInde=9
+  break;
+  case 2:
+    position = -windowSize /100*19
+    zInde=8
+    break;
+    case 3:
+      position = -windowSize /100*13
+      zInde=7
+      break;
+      case 4:
+        position = -windowSize /100*7
+        zInde=6
+        break;
+        case 5:
+          position = -windowSize /100*1.5
+          zInde=5
+          break;
+          case 6:
+            position =  windowSize /100*4
+            zInde=4
+            break;
+            case 7:
+              position =  windowSize /100*10
+              zInde=3
+              break;
+              case 8:
+                position =  windowSize /100*15
+                zInde=2
+break;
+case 9:
+  position = windowSize /100*20
+  zInde=1
+break;
+default:
+  position=0;
+  break;
+}
+for (let j = 0; j < div.length; j++) {
+  let d = div[j] as unknown as HTMLElement
+  d.style.right = `${position}px`;
+  d.style.zIndex=`${zInde}`
+}
+}
+
+}
+
+@HostListener('window:resize', ['$event'])
+onMouseMove(event: MouseEvent) {
+  this.getSizes()
+}
 }
 
 
