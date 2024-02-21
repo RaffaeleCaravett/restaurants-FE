@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit{
    ngOnInit(): void {
 
   this.images = [this.image1, this.image2, this.image3, this.image4];
-  this.getSizes()
+  setTimeout(()=>{
+    this.getSizes()
+  },500)
   }
 yDeg:number=0
 xDeg:number=0
@@ -44,39 +46,39 @@ for(let i = 1 ; i<=9;i++){
   let div = document.getElementsByClassName(`div-${i}`)
 switch(i){
  case 1:
-  position = -windowSize /100*24
+  position = -windowSize /100*20
   zInde=9
   break;
   case 2:
-    position = -windowSize /100*19
+    position = -windowSize /100*15
     zInde=8
     break;
     case 3:
-      position = -windowSize /100*13
+      position = -windowSize /100*10
       zInde=7
       break;
       case 4:
-        position = -windowSize /100*7
+        position = -windowSize /100*6
         zInde=6
         break;
         case 5:
-          position = -windowSize /100*1.5
+          position = -windowSize /100*1.4
           zInde=5
           break;
           case 6:
-            position =  windowSize /100*4
+            position =  windowSize /100*3
             zInde=4
             break;
             case 7:
-              position =  windowSize /100*10
+              position =  windowSize /100*8
               zInde=3
               break;
               case 8:
-                position =  windowSize /100*15
+                position =  windowSize /100*13
                 zInde=2
 break;
 case 9:
-  position = windowSize /100*20
+  position = windowSize /100*17
   zInde=1
 break;
 default:
@@ -95,6 +97,26 @@ for (let j = 0; j < div.length; j++) {
 @HostListener('window:resize', ['$event'])
 onMouseMove(event: MouseEvent) {
   this.getSizes()
+}
+
+onHover(index:number){
+  let windowSize= window.innerWidth;
+  for(let i = 1;i <=9;i++){
+    let div = document.getElementsByClassName(`div-${i}`)
+    console.log(div)
+if(i<index+1){
+  for (let j = 0; j < div.length; j++) {
+    let d = div[j] as unknown as HTMLElement
+    d.style.transform=`translateX(-${windowSize/100*3}px)`
+  }
+}
+if(i>index+1){
+  for (let j = 0; j < div.length; j++) {
+    let d = div[j] as unknown as HTMLElement
+    d.style.transform=`translateX(${windowSize/100*3}px)`
+  }
+}
+  }
 }
 }
 
