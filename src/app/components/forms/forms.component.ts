@@ -9,13 +9,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class FormsComponent implements OnInit{
 
 section!:string;
-
+selectedImage:any
 loginForm!:FormGroup
 signupForm!:FormGroup
-
+submitted:boolean=false
+defaultImage:string=''
 ngOnInit(): void {
 this.section='Login'
-
+this.defaultImage='../../../assets/forms/empty-avatar.webp'
 this.loginForm= new FormGroup({
   email: new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
   password: new FormControl('',[Validators.required,Validators.minLength(6)])
@@ -28,13 +29,26 @@ this.signupForm=new FormGroup({
   password:new FormControl('',[Validators.required,Validators.minLength(6)]),
   ripetiPassword:new FormControl('',[Validators.required,Validators.minLength(6)])
 })
+
 }
 
 login(){
-
+this.submitted=true
 }
 
 signup(){
-
+this.submitted=true
 }
+
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = e => this.selectedImage = reader.result;
+
+        reader.readAsDataURL(file);
+    }
+  }
+
 }

@@ -9,8 +9,10 @@
         <form [formGroup]="loginForm" class="p-4">
     <label for="" class="py-4 fs-3 fw-bold">Email</label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="email">
+    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['email'].invalid"></p>
     <label for="" class="py-4 fs-3 fw-bold">Password</label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="password">
+    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['password'].invalid"></p>
     <div class="p-2 d-flex justify-content-around">
     <button class="px-5 py-3 bg-success border" (click)="login()">LOGIN</button>
 </div>
@@ -43,15 +45,30 @@
       <label for="" class="py-4 fs-3 fw-bold">Ripeti<span class="fs-6">(min 6)</span></label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="ripetiPassword">
     </div>
+    <div class="col-md-12 text-center">
+      <label for="" class="py-4 fs-3 fw-bold">Scegli immagine</label>
+<input type="file" class="d-none my-2" #file accept="image/png, image/gif, image/jpeg, image/jpg" (change)="readURL($event)"> <br>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+<img src="{{selectedImage||defaultImage}}" alt="" class="w-75">
+ <button class="px-5 py-3 bg-warning border w-75" *ngIf="!selectedImage" (click)="file.click()">📷</button>
+ <button class="px-5 py-3 bg-danger border w-75" *ngIf="selectedImage" (click)="selectedImage=undefined">❌</button>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+    </div>
           </div>
-          <div class="p-2 d-flex justify-content-around">
+          <div class="p-2 py-5 d-flex justify-content-around">
             <button class="px-5 py-3 bg-success border" (click)="signup()">SIGNUP</button>
             </div>
           </form>    </div>
     </div>
     <div class="col-md-12 py-5">
-      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Login'" (click)="section='Signup'">Signup</button>
-      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Signup'" (click)="section='Login'">Login</button>
+      <hr>
+      <p class="fs-4 text-center">OR</p>
+      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Login'" (click)="section='Signup';submitted=false">Signup</button>
+      <button class="px-5 py-3 bg-warning border" *ngIf="section=='Signup'" (click)="section='Login';submitted=false">Login</button>
     </div>
   </div>
 </div>
