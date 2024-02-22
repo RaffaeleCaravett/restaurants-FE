@@ -9,10 +9,10 @@
         <form [formGroup]="loginForm" class="p-4">
     <label for="" class="py-4 fs-3 fw-bold">Email</label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="email">
-    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['email'].invalid"></p>
+    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['email'].invalid">Email non valida</p>
     <label for="" class="py-4 fs-3 fw-bold">Password</label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="password">
-    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['password'].invalid"></p>
+    <p class="fs-6 text-danger" *ngIf="submitted&&loginForm.controls['password'].invalid">Password non valida</p>
     <div class="p-2 d-flex justify-content-around">
     <button class="px-5 py-3 bg-success border" (click)="login()">LOGIN</button>
 </div>
@@ -22,29 +22,37 @@
         <form [formGroup]="signupForm" class="p-4">
           <div class="row">
     <div class="col-md-6">
-       <label for="" class="py-4 fs-3 fw-bold">Nome  <span class="fs-6">(min 3)</span></label>
+       <label for="" class="py-4 fs-3 fw-bold">Nome </label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="nome">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['nome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
     </div>
     <div class="col-md-6">
-    <label for="" class="py-4 fs-3 fw-bold">Cognome  <span class="fs-6">(min 3)</span></label>
+    <label for="" class="py-4 fs-3 fw-bold">Cognome </label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="cognome">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['cognome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
     </div>
     <div class="col-md-12">
       <label for="" class="py-4 fs-3 fw-bold">Email</label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="email">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['email'].invalid">Campo non valido. Assicurati di inserire un valore tipo "a&#64;a.com"</p>
     </div>
     <div class="col-md-12">
       <label for="" class="py-4 fs-3 fw-bold">Età</label>
     <input type="number" class="form-control bg-transparent m-auto" formControlName="eta">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['eta'].invalid">Campo non valido. Assicurati di inserire un valore superiore a 18</p>
     </div>
     <div class="col-md-6">
-      <label for="" class="py-4 fs-3 fw-bold">Password <span class="fs-6">(min 6)</span></label>
+      <label for="" class="py-4 fs-3 fw-bold">Password </label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="password">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['password'].invalid">Campo non valido. Assicurati di inserire almeno 6 caratteri.</p>
     </div>
     <div class="col-md-6">
       <label for="" class="py-4 fs-3 fw-bold">Ripeti<span class="fs-6">(min 6)</span></label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="ripetiPassword">
-    </div>
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['ripetiPassword'].invalid ||
+    submitted==true&&signupForm.controls['password'].valid&&signupForm.controls['password'].value!=signupForm.controls['ripetiPassword'].valid
+    ">Campo non valido. Assicurati di inserire almeno 6 caratteri o che le password coincidano.</p>
+  </div>
     <div class="col-md-12 text-center">
       <label for="" class="py-4 fs-3 fw-bold">Scegli immagine</label>
 <input type="file" class="d-none my-2" #file accept="image/png, image/gif, image/jpeg, image/jpg" (change)="readURL($event)"> <br>
