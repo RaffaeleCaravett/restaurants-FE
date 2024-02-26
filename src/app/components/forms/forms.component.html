@@ -21,15 +21,25 @@
       <div *ngIf="section=='Signup'"  class="col-md-6 m-auto">
         <form [formGroup]="signupForm" class="p-4">
           <div class="row">
-    <div class="col-md-6">
-       <label for="" class="py-4 fs-3 fw-bold">Nome </label>
+            <div class="col-md-4 text-center">
+              <input type="file" class="d-none my-2" #file accept="image/png, image/gif, image/jpeg, image/jpg" (change)="readURL($event)"> <br>
+              <img src="{{selectedImage||defaultImage}}" alt="" class="w-100 rounded-circle my-2">
+               <button class="px-2 py-3 bg-warning border w-75" *ngIf="!selectedImage" (click)="file.click()">📷</button>
+               <button class="px-2 py-3 bg-danger border w-75" *ngIf="selectedImage" (click)="selectedImage=undefined">❌</button>
+            </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+           <label for="" class="py-4 fs-3 fw-bold">Nome </label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="nome">
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['nome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
-    </div>
-    <div class="col-md-6">
-    <label for="" class="py-4 fs-3 fw-bold">Cognome </label>
-    <input type="text" class="form-control bg-transparent m-auto" formControlName="cognome">
-    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['cognome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
+        </div>
+        <div class="col-md-12">
+          <label for="" class="py-4 fs-3 fw-bold">Cognome </label>
+          <input type="text" class="form-control bg-transparent m-auto" formControlName="cognome">
+          <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['cognome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
+        </div>
+      </div>
     </div>
     <div class="col-md-12">
       <label for="" class="py-4 fs-3 fw-bold">Email</label>
@@ -37,9 +47,23 @@
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['email'].invalid">Campo non valido. Assicurati di inserire un valore tipo "a&#64;a.com"</p>
     </div>
     <div class="col-md-12">
-      <label for="" class="py-4 fs-3 fw-bold">Età</label>
-    <input type="number" class="form-control bg-transparent m-auto" formControlName="eta">
-    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['eta'].invalid">Campo non valido. Assicurati di inserire un valore superiore a 18</p>
+      <div class="row">
+        <div class="col-md-3">
+           <label for="" class="py-4 fs-3 fw-bold">Via</label>
+    <input type="text" class="form-control bg-transparent m-auto" formControlName="via">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['via'].invalid">Campo non valido. Assicurati di inserire un valore corretto.</p>
+        </div>
+        <div class="col-md-6">
+          <label for="" class="py-4 fs-3 fw-bold">Indirizzo</label>
+          <input type="text" class="form-control bg-transparent m-auto" formControlName="indirizzo">
+          <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['indirizzo'].invalid">Campo non valido. Assicurati di inserire un valore corretto.</p>
+        </div>
+        <div class="col-md-3">
+          <label for="" class="py-4 fs-3 fw-bold">Civico</label>
+          <input type="number" class="form-control bg-transparent m-auto" formControlName="numeroCivico">
+          <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['numeroCivico'].invalid">Campo non valido. Assicurati di inserire un valore corretto.</p>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
       <label for="" class="py-4 fs-3 fw-bold">Password </label>
@@ -47,25 +71,38 @@
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['password'].invalid">Campo non valido. Assicurati di inserire almeno 6 caratteri.</p>
     </div>
     <div class="col-md-6">
-      <label for="" class="py-4 fs-3 fw-bold">Ripeti<span class="fs-6">(min 6)</span></label>
+      <label for="" class="">Ripeti<span class="fs-6">(min 6)</span></label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="ripetiPassword">
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['ripetiPassword'].invalid ||
     submitted==true&&signupForm.controls['password'].valid&&signupForm.controls['password'].value!=signupForm.controls['ripetiPassword'].valid
     ">Campo non valido. Assicurati di inserire almeno 6 caratteri o che le password coincidano.</p>
   </div>
-    <div class="col-md-12 text-center">
-      <label for="" class="py-4 fs-3 fw-bold">Scegli immagine</label>
-<input type="file" class="d-none my-2" #file accept="image/png, image/gif, image/jpeg, image/jpg" (change)="readURL($event)"> <br>
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
-<img src="{{selectedImage||defaultImage}}" alt="" class="w-75">
- <button class="px-5 py-3 bg-warning border w-75" *ngIf="!selectedImage" (click)="file.click()">📷</button>
- <button class="px-5 py-3 bg-danger border w-75" *ngIf="selectedImage" (click)="selectedImage=undefined">❌</button>
+  <div class="col-md-12 py-4">
+    <label for=""></label>
+    <input type="checkbox" class="form-check-input" formControlName="dichiaro" (change)="showScheda=!showScheda" id="exampleCheck1">
+    <label class="form-check-label px-2" for="exampleCheck1"> Dichiaro di essere il titolare o il rappresentante legale dell'azienda</label>
   </div>
-  <div class="col-md-3"></div>
-</div>
+  <div class="col-md-12" *ngIf="showScheda">
+    <div class="col-md-12">
+      <h2>Scheda anagrafica società</h2>
     </div>
+    <form [formGroup]="schedaForm">
+<div class="row">
+  <div class="col-md-6">
+<label for="" class="py-4 fs-3 fw-bold">Capitale sociale</label>
+<input type="text" class="form-control" formControlName="capitaleSociale">
+  </div>
+  <div class="col-md-6">
+<label for="" class="py-4 fs-3 fw-bold">Partita Iva</label>
+<input type="text" class="form-control" formControlName="pIva">
+  </div>
+  <div class="col-md-12">
+    <label for="" class="py-4 fs-3 fw-bold">Titolare/Rappresentante</label>
+    <input type="text" class="form-control" formControlName="rappresentante">
+  </div>
+</div>
+</form>
+</div>
           </div>
           <div class="p-2 py-5 d-flex justify-content-around">
             <button class="px-5 py-3 bg-success border" (click)="signup()">SIGNUP</button>

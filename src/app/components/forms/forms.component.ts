@@ -12,10 +12,13 @@ section!:string;
 selectedImage:any
 loginForm!:FormGroup
 signupForm!:FormGroup
+schedaForm!:FormGroup
 submitted:boolean=false
 defaultImage:string=''
+showScheda!:boolean
 ngOnInit(): void {
-this.section='Login'
+  this.showScheda=false
+this.section='Signup'
 this.defaultImage='../../../assets/forms/empty-avatar.webp'
 this.loginForm= new FormGroup({
   email: new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
@@ -25,11 +28,19 @@ this.signupForm=new FormGroup({
   nome: new FormControl('',[Validators.required,Validators.minLength(2)]),
   cognome: new FormControl('',[Validators.required,Validators.minLength(2)]),
   email:new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-  eta:new FormControl('',[Validators.required,Validators.min(18)]),
+  via:new FormControl('',Validators.required),
+  indirizzo:new FormControl('',Validators.required),
+  numeroCivico:new FormControl('',Validators.required),
   password:new FormControl('',[Validators.required,Validators.minLength(6)]),
-  ripetiPassword:new FormControl('',[Validators.required,Validators.minLength(6)])
-})
+  ripetiPassword:new FormControl('',[Validators.required,Validators.minLength(6)]),
+  dichiaro:new FormControl('',Validators.required)
 
+})
+this.schedaForm= new FormGroup({
+  capitaleSociale: new FormControl('',Validators.required),
+  pIva: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]{11}$/)]),
+  rappresentante: new FormControl('',[Validators.required,Validators.minLength(3)])
+})
 }
 
 login(){
