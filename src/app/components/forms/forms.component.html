@@ -30,14 +30,17 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
-           <label for="" class="py-4 fs-3 fw-bold">Nome </label>
+           <label for="" class="py-4 fs-3 fw-bold">Nome Attività</label>
     <input type="text" class="form-control bg-transparent m-auto" formControlName="nome">
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['nome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
         </div>
         <div class="col-md-12">
-          <label for="" class="py-4 fs-3 fw-bold">Cognome </label>
-          <input type="text" class="form-control bg-transparent m-auto" formControlName="cognome">
-          <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['cognome'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
+          <label for="" class="py-4 fs-3 fw-bold">Tipo Attività</label>
+          <select class="form-select bg-transparent m-auto" formControlName="tipoEsercizio">
+          <option value=""></option>
+          <option value="{{t}}" *ngFor="let t of tipoEsercizio">{{t}}</option>
+          </select>
+          <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['tipoEsercizio'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
         </div>
       </div>
     </div>
@@ -71,7 +74,7 @@
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['password'].invalid">Campo non valido. Assicurati di inserire almeno 6 caratteri.</p>
     </div>
     <div class="col-md-6">
-      <label for="" class="">Ripeti<span class="fs-6">(min 6)</span></label>
+      <label for="" class="py-4 fs-3 fw-bold" >Ripeti</label>
     <input type="password" class="form-control bg-transparent m-auto" formControlName="ripetiPassword">
     <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['ripetiPassword'].invalid ||
     submitted==true&&signupForm.controls['password'].valid&&signupForm.controls['password'].value!=signupForm.controls['ripetiPassword'].valid
@@ -81,6 +84,8 @@
     <label for=""></label>
     <input type="checkbox" class="form-check-input" formControlName="dichiaro" (change)="showScheda=!showScheda" id="exampleCheck1">
     <label class="form-check-label px-2" for="exampleCheck1"> Dichiaro di essere il titolare o il rappresentante legale dell'azienda</label>
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&signupForm.controls['dichiaro'].invalid">Campo non valido.</p>
+
   </div>
   <div class="col-md-12" *ngIf="showScheda">
     <div class="col-md-12">
@@ -91,14 +96,17 @@
   <div class="col-md-6">
 <label for="" class="py-4 fs-3 fw-bold">Capitale sociale</label>
 <input type="text" class="form-control" formControlName="capitaleSociale">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&schedaForm.controls['capitaleSociale'].invalid">Campo non valido. Assicurati di inserire un valore corretto.</p>
   </div>
   <div class="col-md-6">
 <label for="" class="py-4 fs-3 fw-bold">Partita Iva</label>
 <input type="text" class="form-control" formControlName="pIva">
+    <p class="fs-6 text-danger" *ngIf="submitted==true&&schedaForm.controls['pIva'].invalid">Campo non valido. Assicurati di inserire almeno 11 caratteri numerici.</p>
   </div>
   <div class="col-md-12">
     <label for="" class="py-4 fs-3 fw-bold">Titolare/Rappresentante</label>
     <input type="text" class="form-control" formControlName="rappresentante">
+        <p class="fs-6 text-danger" *ngIf="submitted==true&&schedaForm.controls['rappresentante'].invalid">Campo non valido. Assicurati di inserire almeno 3 caratteri.</p>
   </div>
 </div>
 </form>
