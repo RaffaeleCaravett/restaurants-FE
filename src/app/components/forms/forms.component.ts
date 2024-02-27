@@ -30,7 +30,7 @@ ngOnInit(): void {
     }
   })
   this.showScheda=false
-this.section='Signup'
+this.section='Login'
 this.defaultImage='assets/forms/empty-avatar.webp'
 this.loginForm= new FormGroup({
   email: new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
@@ -57,6 +57,22 @@ this.schedaForm= new FormGroup({
 
 login(){
 this.submitted=true
+if(this.loginForm.valid){
+  this.authService.logIn(
+    {
+      email:this.loginForm.controls['email'].value,
+      password:this.loginForm.controls['password'].value
+    }
+  ).subscribe({
+    next:(tokens:any)=>{
+    console.log(tokens)
+  },
+  error:(error)=>{
+this.toastr.show(error.error.message||"Problema nel login")
+  },
+  complete:()=>{}
+})
+}
 }
 
 signup(){
@@ -104,11 +120,6 @@ if(this.signupForm.valid&&this.schedaForm.valid&&this.signupForm.controls['passw
           ,
           error: (err:any)=>{
             this.toastr.show(err.error.message||"Qualcosa è andato storto nel salvataggio dell'attività")
-          if(err&&err.error.message){
-            let splittedError=err.error.message.split(' ')[3]
-            console.log(splittedError)
-          }
-
           },
           complete: () => { }
 

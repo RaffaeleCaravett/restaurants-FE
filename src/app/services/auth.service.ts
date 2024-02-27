@@ -14,6 +14,7 @@ export class AuthService{
 public isAuthenticated:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 public auth:string='/auth'
 public register:string='/register'
+public login:string='/esercizioLogin'
 public citta:string='/citta'
 public schedaAnagrafica:string='/schedaAnagrafica'
 constructor(private authGuard:AuthGuard,private http:HttpClient){}
@@ -42,4 +43,8 @@ addScheda(scheda:{}){
   getAllCitta(){
     return this.http.get(environment.API_URL+this.citta)
   }
+
+logIn(body:{}){
+  return this.http.post(environment.API_URL+this.auth+this.login,body)
+}
 }
