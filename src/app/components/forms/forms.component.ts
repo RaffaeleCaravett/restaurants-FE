@@ -61,7 +61,7 @@ this.submitted=true
 
 signup(){
 this.submitted=true
-if(this.signupForm.valid&&this.schedaForm.valid&&this.signupForm.controls['password'].value==this.signupForm.controls['ripetiPassword'].value){
+if(this.signupForm.valid&&this.schedaForm.valid&&this.signupForm.controls['password'].value==this.signupForm.controls['ripetiPassword'].value&&this.selectedImage){
   this.authService.signUp(
     {
       nome:this.signupForm.controls['nome'].value,
@@ -86,6 +86,11 @@ if(this.signupForm.valid&&this.schedaForm.valid&&this.signupForm.controls['passw
          next :(scheda:any)=>{
            if(scheda){
   this.toastr.show("Scheda salvata")
+  this.signupForm.reset()
+  this.schedaForm.reset()
+  this.section='Login'
+  this.fileImage=null
+  this.selectedImage=null
           }
         },
         error:(err:any)=>{
@@ -98,7 +103,13 @@ if(this.signupForm.valid&&this.schedaForm.valid&&this.signupForm.controls['passw
     }
           ,
           error: (err:any)=>{
-            this.toastr.show(err.error.message||"Qualcosa è andato storto nel salvataggio dell'attività")          },
+            this.toastr.show(err.error.message||"Qualcosa è andato storto nel salvataggio dell'attività")
+          if(err&&err.error.message){
+            let splittedError=err.error.message.split(' ')[3]
+            console.log(splittedError)
+          }
+
+          },
           complete: () => { }
 
   })

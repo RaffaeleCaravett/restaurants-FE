@@ -26,6 +26,7 @@
               <img src="{{selectedImage||defaultImage}}" alt="" class="w-100 rounded-circle my-2">
                <button class="px-2 py-3 bg-warning border w-75" *ngIf="!selectedImage" (click)="file.click()">📷</button>
                <button class="px-2 py-3 bg-danger border w-75" *ngIf="selectedImage" (click)="selectedImage=undefined;fileImage=null">❌</button>
+               <p class="fs-6 text-danger" *ngIf="submitted&&!this.selectedImage">Scegli un'immagine da caricare!</p>
             </div>
     <div class="col-md-8">
       <div class="row">
