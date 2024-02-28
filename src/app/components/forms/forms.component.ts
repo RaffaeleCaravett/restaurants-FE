@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -21,7 +22,7 @@ showScheda!:boolean
 tipoEsercizio:String[]=['Ristorante','Pizzeria','Ristorante_Pizzeria']
 fileImage:any
 citta:any[]=[]
-constructor(private authService:AuthService,private toastr:ToastrService){}
+constructor(private authService:AuthService,private toastr:ToastrService,private router:Router){}
 
 ngOnInit(): void {
   this.authService.getAllCitta().subscribe((citta:any)=>{
@@ -65,7 +66,13 @@ if(this.loginForm.valid){
     }
   ).subscribe({
     next:(tokens:any)=>{
-    console.log(tokens)
+    if(tokens){
+      this.authService.token=tokens.tokens.accessToken
+      localStorage.setItem('accessToken',tokens.tokens.accessToken)
+      localStorage.setItem('refreshToken',tokens.tokens.refreshToken)
+      this.authService.authenticateUser(true)
+      this.router.navigate(['/office'])
+    }
   },
   error:(error)=>{
 this.toastr.show(error.error.message||"Problema nel login")

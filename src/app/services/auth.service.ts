@@ -17,6 +17,7 @@ public register:string='/register'
 public login:string='/esercizioLogin'
 public citta:string='/citta'
 public schedaAnagrafica:string='/schedaAnagrafica'
+public token:string = ''
 constructor(private authGuard:AuthGuard,private http:HttpClient){}
 
 authenticateUser(bool:boolean){
@@ -46,5 +47,8 @@ addScheda(scheda:{}){
 
 logIn(body:{}){
   return this.http.post(environment.API_URL+this.auth+this.login,body)
+}
+verifyEsecizioToken(token:string){
+  return this.http.get(environment.API_URL+this.auth+'/esercizio/'+token)
 }
 }
