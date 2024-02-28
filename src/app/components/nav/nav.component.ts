@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavComponent implements OnInit{
 isAuthenticated:boolean=false
 
-constructor(private authService:AuthService){
+constructor(private authService:AuthService,private router:Router){
 this.authService.isAuthenticated.subscribe((boolean:boolean)=>{
   this.isAuthenticated=boolean
 })
@@ -17,5 +18,10 @@ this.authService.isAuthenticated.subscribe((boolean:boolean)=>{
 
   ngOnInit(): void {
   }
-
+logout(){
+  localStorage.clear()
+  this.authService.token=''
+  this.authService.authenticateUser(false)
+  this.router.navigate(['/home'])
+}
 }

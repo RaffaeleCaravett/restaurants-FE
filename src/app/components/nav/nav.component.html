@@ -8,8 +8,9 @@
 <p [routerLink]="'/office'" *ngIf="isAuthenticated">Office</p>
       </div>
       <div class="col-md-4">
-<p [routerLink]="'/forms'">Login/Signup</p>
-      </div>
+<p [routerLink]="'/forms'" *ngIf="!isAuthenticated">Login/Signup</p>
+<p (click)="logout()" *ngIf="isAuthenticated">Logout</p>
+</div>
     </div>
   </div>
 </nav>

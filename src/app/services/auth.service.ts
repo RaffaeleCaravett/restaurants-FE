@@ -51,4 +51,7 @@ logIn(body:{}){
 verifyEsecizioToken(token:string){
   return this.http.get(environment.API_URL+this.auth+'/esercizio/'+token)
 }
+verifyEsecizioRefreshToken(refreshToken:string){
+  return this.http.get(environment.API_URL+this.auth+'/refreshEsercizioToken/'+refreshToken)
+}
 }
