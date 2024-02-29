@@ -31,15 +31,15 @@ this.router.navigate(['/office'])
 
 this.authService.verifyEsecizioRefreshToken(localStorage.getItem('refreshToken')!).subscribe((tokens:any)=>{
   if(tokens){
-    this.authService.verifyEsecizioToken(localStorage.getItem('accessToken')!).subscribe({
+    this.authService.verifyEsecizioToken(tokens.accessToken).subscribe({
       next:(data:any)=>{
       if(data){
         localStorage.setItem('restaurant',JSON.stringify(data))
-        this.authService.token=localStorage.getItem('accessToken')!
+        this.authService.token=tokens.accessToken
         this.authService.authenticateUser(true)
-        localStorage.setItem('accessToken',localStorage.getItem('accessToken')!)
+        localStorage.setItem('accessToken',tokens.accessToken)
         this.router.navigate(['/office'])      }
-    },error:()=>{this.router.navigate(['/home'])}
+    },error:()=>{this.router.navigate(['/'])}
     ,complete:()=>{}
   })
 
