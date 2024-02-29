@@ -87,22 +87,25 @@
         <div class="col-md-8 p-1">
 <div class="p-2 bg border shadow-sm">
   <h2>Da qui puoi inserire i tuoi prodotti nel menù.</h2>
-<form [formGroup]="antipastoForm">
+<form [formGroup]="prodottoForm">
 <label class="py-1">Che tipo di prodotto vuoi inserire?</label>
-<select name="" class="form-select w-75 m-auto" id="">
+<select name="" class="form-select w-75 m-auto" id="" formControlName="tipoProdotto">
   <option value=""></option>
   <option value="{{tp}}" *ngFor="let tp of tipoProdotto">{{tp}}</option>
 </select>
 <label class="py-1">Come si chiama il tuo prodotto?</label>
-<input type="text" class="form-control w-75 m-auto">
+<input type="text" class="form-control w-75 m-auto" formControlName="nome">
 <label class="py-1">Scegli gli ingredienti</label>
-<select name="" class="form-select w-75 m-auto" id="">
+<select name="" class="form-select w-75 m-auto" id="" (change)="updateIngredienti(prodottoForm.controls['ingrediente_id'].value)" formControlName="ingrediente_id">
 <option value=""></option>
+<option value="{{i.id}}" *ngFor="let i of ingredienti">{{i.nome}}</option>
 </select>
+<p *ngFor="let i of chosedIngredients,index as a"><span *ngIf="a<chosedIngredients.length">{{i.nome}} ,</span>
+  <span *ngIf="a==chosedIngredients.length">{{i.nome}}</span></p>
 <label class="py-1">Il prezzo lo calcoliamo noi :</label>
-<input type="text" class="form-control w-75 m-auto">
+<input type="text" class="form-control w-75 m-auto" formControlName="prezzo">
 <label class="py-1">Il tuo locale :</label>
-<input type="text" class="form-control w-75 m-auto">
+<input type="text" class="form-control w-75 m-auto" formControlName="esercizio_id">
           </form>
 </div>
         </div>
