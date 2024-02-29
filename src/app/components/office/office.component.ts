@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-office',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./office.component.scss']
 })
 export class OfficeComponent implements OnInit {
-office:boolean=false
+office:boolean=true
 esercizio:any
+antipastoForm!:FormGroup
+tipoProdotto:string[]=['ANTIPASTO','PRIMO','SECONDO','PIZZA_BIANCA','PIZZA_ROSSA','DOLCE','BIBITA']
+menu:any
 ngOnInit(): void {
 if(localStorage.getItem('restaurant')){
   this.esercizio=JSON.parse(localStorage.getItem('restaurant')!)

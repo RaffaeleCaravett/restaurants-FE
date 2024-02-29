@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
 import { OfficeComponent } from './office.component';
 import { OfficeRoutingModule } from './office-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { OfficeRoutingModule } from './office-routing.module';
   ],
   imports: [
     CommonModule,
-    OfficeRoutingModule
+    OfficeRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
 

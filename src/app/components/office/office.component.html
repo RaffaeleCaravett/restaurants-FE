@@ -67,32 +67,63 @@
           </div>
   </div>
 </div>
-<div class="container text-center" *ngIf="office">
-  <div class="row">
+<div class="container text-center py-5" *ngIf="office">
+  <div class="row py-5">
     <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-4">
+      <div class="row" *ngIf="esercizio">
+        <div class="col-md-4 p-1">
+          <div class="p-2 bg border shadow-sm">
+            <img src="{{esercizio.immagine_profilo}}" class="w-100" alt="">
+          </div>
+        </div>
+        <div class="col-md-8 p-1 fs-5">
+          <div class="p-2 bg border shadow-sm" style="height: 100%;">
+            <h1>{{esercizio.id + " - " + esercizio.nome}}</h1>
+<p class="py-1">{{esercizio.tipoEsercizio}}</p>
+<p class="py-1">Dove ti trovi ? {{esercizio.indirizzo + " - " + esercizio.citta.nome}}</p>
+<p class="py-1">Email {{esercizio.email}}</p>
+          </div>
+</div>
+        <div class="col-md-8 p-1">
+<div class="p-2 bg border shadow-sm">
+  <h2>Da qui puoi inserire i tuoi prodotti nel menù.</h2>
+<form [formGroup]="antipastoForm">
+<label class="py-1">Che tipo di prodotto vuoi inserire?</label>
+<select name="" class="form-select w-75 m-auto" id="">
+  <option value=""></option>
+  <option value="{{tp}}" *ngFor="let tp of tipoProdotto">{{tp}}</option>
+</select>
+<label class="py-1">Come si chiama il tuo prodotto?</label>
+<input type="text" class="form-control w-75 m-auto">
+<label class="py-1">Scegli gli ingredienti</label>
+<select name="" class="form-select w-75 m-auto" id="">
+<option value=""></option>
+</select>
+<label class="py-1">Il prezzo lo calcoliamo noi :</label>
+<input type="text" class="form-control w-75 m-auto">
+<label class="py-1">Il tuo locale :</label>
+<input type="text" class="form-control w-75 m-auto">
+          </form>
+</div>
+        </div>
+        <div class="col-md-4 p-1">
+<div class="p-2 bg border shadow-sm overflow-auto" style="height: 100%;">
+<h2>Menù</h2>
+<p class="fs-4 py-4" *ngIf="!menu">
+ Inserisci i tuoi prodotti!
+</p>
+</div>
+        </div>
+        <div class="col-md-3 p-1">
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-3 p-1">
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-3 p-1">
 
         </div>
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-3 p-1">
 
         </div>
       </div>
