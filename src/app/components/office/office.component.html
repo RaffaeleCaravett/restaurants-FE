@@ -100,21 +100,29 @@
 <option value=""></option>
 <option value="{{i.id}}" *ngFor="let i of ingredienti">{{i.nome}}</option>
 </select>
-<p *ngFor="let i of chosedIngredients,index as a"><span *ngIf="a<chosedIngredients.length">{{i.nome}} ,</span>
-  <span *ngIf="a==chosedIngredients.length">{{i.nome}}</span></p>
-<label class="py-1">Il prezzo lo calcoliamo noi :</label>
-<input type="text" class="form-control w-75 m-auto" formControlName="prezzo">
+<p *ngFor="let i of chosedIngredients,index as a"><span >{{i.nome}}</span>
+  <span *ngIf="a+1<chosedIngredients.length">,</span> <span *ngIf="a+1==chosedIngredients.length">.</span> <button class="btn fs-6" (click)="removeItemFromChosed(i)">❌</button></p>
+<label class="py-1">Il prezzo :</label>
+<input type="number" class="form-control w-75 m-auto" formControlName="prezzo">
 <label class="py-1">Il tuo locale :</label>
 <input type="text" class="form-control w-75 m-auto" formControlName="esercizio_id">
+<button class="btn btn-success my-2" (click)="addProdotto()">Aggiungi prodotto al menù</button>
           </form>
 </div>
         </div>
         <div class="col-md-4 p-1">
 <div class="p-2 bg border shadow-sm overflow-auto" style="height: 100%;">
 <h2>Menù</h2>
-<p class="fs-4 py-4" *ngIf="!menu">
+<p class="fs-4 py-4" *ngIf="!menu||menu&&menu.length==0">
  Inserisci i tuoi prodotti!
 </p>
+<div *ngFor="let p of menu" class="fs-5">
+  <h2>Antipasti</h2>
+  <p *ngIf="p.tipoProdotto=='ANTIPASTO'">
+{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+    <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span>
+  </p>
+</div>
 </div>
         </div>
         <div class="col-md-3 p-1">
