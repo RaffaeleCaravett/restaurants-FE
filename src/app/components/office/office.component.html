@@ -123,7 +123,7 @@ chosedIngredients=[]">❌</button>
   <h2>Antipasti</h2>
 <div *ngFor="let p of menu" class="fs-5">
   <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='ANTIPASTO'">
-{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
     <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
     <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
   </p>
@@ -131,7 +131,7 @@ chosedIngredients=[]">❌</button>
 <h2>Primi</h2>
 <div *ngFor="let p of menu" class="fs-5">
   <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='PRIMO'">
-{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
     <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
     <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
   </p>
@@ -139,7 +139,8 @@ chosedIngredients=[]">❌</button>
 <h2>Secondi</h2>
 <div *ngFor="let p of menu" class="fs-5">
     <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='SECONDO'">
-  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br>
+  <span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
       <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
       <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
     </p>
@@ -147,7 +148,8 @@ chosedIngredients=[]">❌</button>
   <h2 >Pizze bianche</h2>
   <div *ngFor="let p of menu" class="fs-5">
     <p  class="bg-warning p-2 my-1"  *ngIf="p.tipoProdotto=='PIZZA_BIANCA'" >
-  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br>
+  <span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
       <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
       <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
     </p>
@@ -155,7 +157,8 @@ chosedIngredients=[]">❌</button>
   <h2 >Pizze rosse</h2>
   <div *ngFor="let p of menu" class="fs-5">
     <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='PIZZA_ROSSA'" >
-  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br>
+  <span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
       <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
       <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
     </p>
@@ -163,7 +166,8 @@ chosedIngredients=[]">❌</button>
   <h2>Dolci</h2>
   <div *ngFor="let p of menu" class="fs-5">
     <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='DOLCE'" >
-  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br>
+  <span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
       <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
       <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
     </p>
@@ -171,7 +175,8 @@ chosedIngredients=[]">❌</button>
   <h2 >Bibite</h2>
   <div *ngFor="let p of menu" class="fs-5">
     <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='BIBITA'">
-  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br>
+  <span class="py-1 fs-6">Ingredients:</span><br> <span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
       <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
       <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
     </p>
@@ -180,17 +185,24 @@ chosedIngredients=[]">❌</button>
 
 </div>
         </div>
-        <div class="col-md-3 p-1">
-
+        <div class="col-md-4 p-1">
+<div class="p-2 bg border shadow-sm">
+  <h2>Clienti :</h2>
+  <p>Attualmente hanno ordinato da te : {{esercizio.clienteList?.length||0}} persone</p>
+  <p *ngFor="let c of esercizio.clienteList">{{c.nome + " " + c.cognome}}</p>
+</div>
         </div>
-        <div class="col-md-3 p-1">
-
+        <div class="col-md-4 p-1">
+<div class="p-2 bg border shadow-sm">
+  <h2>Ordini spediti :</h2>
+  <p>Attualmente hai spedito {{acquisti.length}} ordini</p>
+  <p *ngFor="let a of acquisti">{{a.cliente.nome + " - " + a.prezzo}}</p>
+</div>
         </div>
-        <div class="col-md-3 p-1">
-
-        </div>
-        <div class="col-md-3 p-1">
-
+        <div class="col-md-4 p-1">
+<div class="p-2 bg border shadow-sm">
+  <h2>Incasso :</h2>
+</div>
         </div>
       </div>
     </div>

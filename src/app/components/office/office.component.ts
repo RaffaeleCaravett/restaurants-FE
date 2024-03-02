@@ -18,11 +18,17 @@ ingredienti:any[]=[]
 chosedIngredients:any[]=[]
 modify:boolean=false
 selectedObject:any=null
+acquisti:any[]=[]
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
 if(localStorage.getItem('restaurant')){
   this.esercizio=JSON.parse(localStorage.getItem('restaurant')!)
+  this.officeService.getAcquistoByEsercizio(this.esercizio.id).subscribe((acquisti:any)=>{
+    if(acquisti){
+      this.acquisti=acquisti
+    }
+  })
 }
 this.prodottoForm=new FormGroup({
   tipoProdotto:new FormControl('',Validators.required),
