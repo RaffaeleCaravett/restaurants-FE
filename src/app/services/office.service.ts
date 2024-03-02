@@ -15,6 +15,8 @@ export class OfficeService{
 public ingrediente:string='/ingrediente'
 public prodotto:string='/prodotto'
 public acquisto:string='/acquisto'
+public cliente:string='/cliente'
+public esercizio:string='/esercizio'
 
 constructor(private http:HttpClient){}
 
@@ -35,5 +37,8 @@ putProdotto(prodottoId:number,prodotto:any){
 }
 getAcquistoByEsercizio(esercizioId:number){
   return this.http.get(environment.API_URL+this.acquisto+'/esercizio/'+esercizioId)
+}
+getClienteByEsercizio(esercizioId:number,page?:number,size?:number,orderBy?:string){
+return this.http.get(environment.API_URL+this.esercizio+`/byEsercizio/${esercizioId}?page=${page||0}&size=${size||10}&orderBy=${orderBy||'id'}`)
 }
 }

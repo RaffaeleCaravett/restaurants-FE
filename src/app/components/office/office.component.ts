@@ -19,15 +19,22 @@ chosedIngredients:any[]=[]
 modify:boolean=false
 selectedObject:any=null
 acquisti:any[]=[]
+incasso:number=0
+clienteList:any[]=[]
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
 if(localStorage.getItem('restaurant')){
   this.esercizio=JSON.parse(localStorage.getItem('restaurant')!)
+  this.clienteList=this.esercizio.clienteList
   this.officeService.getAcquistoByEsercizio(this.esercizio.id).subscribe((acquisti:any)=>{
     if(acquisti){
       this.acquisti=acquisti
-    }
+       for(let a of acquisti){
+        this.incasso+=a.totale
+       }
+      }
+
   })
 }
 this.prodottoForm=new FormGroup({
@@ -166,5 +173,10 @@ for(let i of this.chosedIngredients){
     }
   })
   }
+}
+orderClienti(param:string){
+  this.officeService.getClienteByEsercizio(this.esercizio.id,0,10,param).subscribe((clienti:any)=>{
+ this.clienteList=clienti.content
+  })
 }
 }

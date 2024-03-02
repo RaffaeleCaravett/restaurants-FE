@@ -188,13 +188,26 @@ chosedIngredients=[]">❌</button>
         <div class="col-md-4 p-1">
 <div class="p-2 bg border shadow-sm">
   <h2>Clienti :</h2>
+  <div class="row">
+ <p> Oridna per :</p>
+    <div class="col-md-4" style="cursor: pointer;" (click)="orderClienti('nome')">Nome</div>
+    <div class="col-md-4" style="cursor: pointer;" (click)="orderClienti('eta')">Età</div>
+    <div class="col-md-4" style="cursor: pointer;" (click)="orderClienti('acquisto')">Acquisti effettuati</div>
+  </div>
   <p>Attualmente hanno ordinato da te : {{esercizio.clienteList?.length||0}} persone</p>
-  <p *ngFor="let c of esercizio.clienteList">{{c.nome + " " + c.cognome}}</p>
+  <p *ngFor="let c of clienteList">{{c.nome + " " + c.cognome}}</p>
 </div>
         </div>
         <div class="col-md-4 p-1">
 <div class="p-2 bg border shadow-sm">
   <h2>Ordini spediti :</h2>
+  <div class="row">
+    Oridna per :
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+  </div>
   <p>Attualmente hai spedito {{acquisti.length}} ordini</p>
   <p *ngFor="let a of acquisti">{{a.cliente.nome + " - " + a.prezzo}}</p>
 </div>
@@ -202,6 +215,14 @@ chosedIngredients=[]">❌</button>
         <div class="col-md-4 p-1">
 <div class="p-2 bg border shadow-sm">
   <h2>Incasso :</h2>
+  <div class="row">
+    Oridna per :
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+  </div>
+    <p>Attualmente il tuo incasso è di {{incasso}} euro.</p>
 </div>
         </div>
       </div>
