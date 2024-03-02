@@ -106,23 +106,78 @@
 <input type="number" class="form-control w-75 m-auto" formControlName="prezzo">
 <label class="py-1">Il tuo locale :</label>
 <input type="text" class="form-control w-75 m-auto" formControlName="esercizio_id">
-<button class="btn btn-success my-2" (click)="addProdotto()">Aggiungi prodotto al menù</button>
-          </form>
+<button class="btn btn-success my-2" *ngIf="!modify" (click)="addProdotto()">Aggiungi prodotto al menù</button>
+<button class="btn btn-success m-1" *ngIf="modify" (click)="modifyObject('modify')">Modifica prodotto</button>
+<button class="btn btn-success m-1" *ngIf="modify" (click)="modify=false;selectedObject=null;prodottoForm.reset();prodottoForm.controls['esercizio_id'].setValue(esercizio.nome);
+chosedIngredients=[]">❌</button>
+
+</form>
 </div>
         </div>
-        <div class="col-md-4 p-1">
-<div class="p-2 bg border shadow-sm overflow-auto" style="height: 100%;">
+        <div class="col-md-4 p-1" >
+<div class="p-2 bg border shadow-sm overflow-auto" style="height: 450px">
 <h2>Menù</h2>
 <p class="fs-4 py-4" *ngIf="!menu||menu&&menu.length==0">
  Inserisci i tuoi prodotti!
 </p>
-<div *ngFor="let p of menu" class="fs-5">
   <h2>Antipasti</h2>
-  <p *ngIf="p.tipoProdotto=='ANTIPASTO'">
+<div *ngFor="let p of menu" class="fs-5">
+  <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='ANTIPASTO'">
 {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
-    <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span>
+    <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+    <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
   </p>
 </div>
+<h2>Primi</h2>
+<div *ngFor="let p of menu" class="fs-5">
+  <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='PRIMO'">
+{{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+    <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+    <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+  </p>
+</div>
+<h2>Secondi</h2>
+<div *ngFor="let p of menu" class="fs-5">
+    <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='SECONDO'">
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+      <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+      <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+    </p>
+  </div>
+  <h2 >Pizze bianche</h2>
+  <div *ngFor="let p of menu" class="fs-5">
+    <p  class="bg-warning p-2 my-1"  *ngIf="p.tipoProdotto=='PIZZA_BIANCA'" >
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+      <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+      <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+    </p>
+  </div>
+  <h2 >Pizze rosse</h2>
+  <div *ngFor="let p of menu" class="fs-5">
+    <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='PIZZA_ROSSA'" >
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+      <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+      <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+    </p>
+  </div>
+  <h2>Dolci</h2>
+  <div *ngFor="let p of menu" class="fs-5">
+    <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='DOLCE'" >
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+      <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+      <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+    </p>
+  </div>
+  <h2 >Bibite</h2>
+  <div *ngFor="let p of menu" class="fs-5">
+    <p  class="bg-warning p-2 my-1" *ngIf="p.tipoProdotto=='BIBITA'">
+  {{p.nomeProdotto + ' - ' + p.prezzo}} <br><span class="fs-6" *ngFor="let i of p.ingredientes, index as a">{{i.nome}}
+      <span *ngIf="a+1<p.ingredientes.length">,</span> <span *ngIf="a+1==p.ingredientes.length">.</span></span> <span><button class="btn fs-5" (click)="deleteItem(p.id)">❌</button>
+      <button class="btn fs-5" (click)="modifyObject(p)">🖊️</button></span>
+    </p>
+  </div>
+
+
 </div>
         </div>
         <div class="col-md-3 p-1">

@@ -16,7 +16,8 @@ tipoProdotto:string[]=['ANTIPASTO','PRIMO','SECONDO','PIZZA_BIANCA','PIZZA_ROSSA
 menu:any
 ingredienti:any[]=[]
 chosedIngredients:any[]=[]
-
+modify:boolean=false
+selectedObject:any=null
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
@@ -105,5 +106,59 @@ if(prodotto){
   this.menu=prodotto
 }
 })
+}
+deleteItem(item:number){
+this.officeService.deleteProdott(this.esercizio.id,item).subscribe({
+  next:(items:any)=>{
+if(items){
+  this.toastr.show('Prodotto eliminato')
+  this.getAllProdotti()
+}
+},
+error:(err:any)=>{this.toastr.show(err.error.message||"Qualcosa è andato storto nell'eliminazione del dato")},
+complete:()=>{}
+})
+}
+
+modifyObject(object?:any){
+  if(object!='modify'){
+      this.selectedObject=object
+      this.modify=true
+this.prodottoForm.patchValue({
+tipoProdotto:object.tipoProdotto,
+nome:object.nomeProdotto,
+prezzo:object.prezzo
+  })
+this.chosedIngredients=object.ingredientes
+    }else{
+let ingredients:any[]=[]
+for(let i of this.chosedIngredients){
+  ingredients.push(i.id)
+}
+      this.officeService.putProdotto(this.selectedObject.id,
+  {
+    nome:this.prodottoForm.controls['nome'].value,
+    prezzo:this.prodottoForm.controls['prezzo'].value,
+    tipoProdotto:this.prodottoForm.controls['tipoProdotto'].value,
+    esercizio_id:this.esercizio.id,
+    ingredienti_id:ingredients
+  }).subscribe({
+    next:(prodotto:any)=>{
+      if(prodotto){
+        this.getAllProdotti()
+      }
+    },
+    error:(err:any)=>{
+      this.toastr.show(err.error.message||"Qualcosa è andato storto nella modifica del prodotto.")
+    },
+    complete:()=>{
+      this.prodottoForm.reset()
+      this.modify=false;
+      this.selectedObject=null;
+      this.prodottoForm.controls['esercizio_id'].setValue(this.esercizio.nome);
+      this.chosedIngredients=[]
+    }
+  })
+  }
 }
 }
