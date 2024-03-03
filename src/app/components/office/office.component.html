@@ -72,8 +72,11 @@
     <div class="col-md-12">
       <div class="row" *ngIf="esercizio">
         <div class="col-md-4 p-1">
-          <div class="p-2 bg border shadow-sm">
-            <img src="{{esercizio.immagine_profilo}}" class="w-100" alt="">
+          <div class="p-2 bg border shadow-sm position-relative">
+            <img src="{{fileImage||esercizio.immagine_profilo}}" class="w-100"  alt="" style="cursor: pointer; height: 244px;" (click)="image.click()">
+          <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" class="d-none" #image (change)="updateEsercizioImage($event)">
+          <button class="btn" type="button" *ngIf="showImageButton" (click)="updateImage()">Carica</button>
+          <button class="btn" type="button" *ngIf="showImageButton" (click)="fileImage=null;showImageButton=false">Cancella</button>
           </div>
         </div>
         <div class="col-md-8 p-1 fs-5">

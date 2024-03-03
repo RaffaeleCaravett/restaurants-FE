@@ -4,6 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 import { OfficeComponent } from './office.component';
 import { OfficeRoutingModule } from './office-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     OfficeRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
 

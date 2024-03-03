@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { OfficeService } from 'src/app/services/office.service';
@@ -8,8 +9,8 @@ import { OfficeService } from 'src/app/services/office.service';
   templateUrl: './office.component.html',
   styleUrls: ['./office.component.scss']
 })
-export class OfficeComponent implements OnInit {
-office:boolean=true
+export class OfficeComponent implements AfterViewInit {
+office:boolean=false
 esercizio:any
 prodottoForm!:FormGroup
 tipoProdotto:string[]=['ANTIPASTO','PRIMO','SECONDO','PIZZA_BIANCA','PIZZA_ROSSA','DOLCE','BIBITA']
@@ -29,9 +30,12 @@ buyForm!:FormGroup
 citta:any[]=[]
 otherBusinessesForm!:FormGroup
 otherBusinesses:any[]=[]
+fileImage:any
+showImageButton:boolean=false
+fileImg:any
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
-ngOnInit(): void {
+ngAfterViewInit(): void {
 if(localStorage.getItem('restaurant')){
   this.esercizio=JSON.parse(localStorage.getItem('restaurant')!)
 this.orderClienti('id')
@@ -50,7 +54,7 @@ this.prodottoForm=new FormGroup({
   nome:new FormControl('',Validators.required),
   ingrediente_id:new FormControl('',Validators.required),
   prezzo:new FormControl('',Validators.required),
-  esercizio_id:new FormControl(this.esercizio.nome,Validators.required)
+  esercizio_id:new FormControl(this.esercizio?.nome,Validators.required)
 })
 this.prodottoForm.controls['esercizio_id'].disable()
 this.officeService.getAllIngredienti().subscribe((ingredienti:any)=>{
@@ -236,4 +240,40 @@ if(this.otherBusinessesForm.controls['citta'].value==''&&this.otherBusinessesFor
   this.toastr.show("Hai appena effettuato una ricerca senza parametri")
 }
   }
+  updateEsercizioImage(event:any){
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0] && event.target.files[0].size > 1048576) {
+       this.toastr.show("Dimensioni del file troppo grandi, massimo 1 MB")
+    }else{
+      this.fileImg=event.target.files[0]
+
+        const reader = new FileReader();
+        reader.onload = e => this.fileImage  = reader.result;
+
+        reader.readAsDataURL(event.target.files[0]);
+    this.showImageButton=true
+      }
+
+    }
+  }
+  updateImage(){
+    if(this.fileImg){
+      this.officeService.updateEsercizioImg(this.esercizio.id,this.fileImg).subscribe({
+        next:(es:any)=>{
+          this.esercizio=es
+          localStorage.removeItem('restaurant')
+          localStorage.setItem('restaurant',JSON.stringify(this.esercizio))
+        this.toastr.show("Immagine caricata")
+
+        },
+        error:(err:any)=>{
+          this.toastr.show(err.error.message)
+        },
+        complete:()=>{
+      this.fileImage=null
+          this.showImageButton=false
+        }
+      })
+    }
+}
 }

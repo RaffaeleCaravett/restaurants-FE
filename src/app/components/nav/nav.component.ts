@@ -22,6 +22,6 @@ logout(){
   localStorage.clear()
   this.authService.token=''
   this.authService.authenticateUser(false)
-  this.router.navigate(['/home'])
+  this.router.navigate(['/forms'])
 }
 }
