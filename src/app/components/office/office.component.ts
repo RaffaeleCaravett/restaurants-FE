@@ -18,10 +18,11 @@ ingredienti:any[]=[]
 chosedIngredients:any[]=[]
 modify:boolean=false
 selectedObject:any=null
-acquisti:any[]=[]
+acquisti:any
 incasso:number=0
 clienteList:any
 clienteParam:any
+acquistiParam:any
 showAnno:boolean=false
 showMese:boolean=false
 buyForm!:FormGroup
@@ -34,7 +35,7 @@ this.orderClienti('id')
   this.officeService.getAcquistoByEsercizio(this.esercizio.id).subscribe((acquisti:any)=>{
     if(acquisti){
       this.acquisti=acquisti
-       for(let a of acquisti){
+       for(let a of acquisti.content){
         this.incasso+=a.totale
        }
       }
@@ -186,11 +187,13 @@ orderClienti(param:string,page?:number){
   this.officeService.getClienteByEsercizio(this.esercizio.id,page||0,10,param).subscribe((clienti:any)=>{
  this.clienteList=clienti
  this.clienteParam=param
- console.log(clienti)
   })
 }
-orderAcquisto(param:string){
-
+orderAcquisto(param:string,page?:number){
+  this.officeService.getAcquistoByEsercizio(this.esercizio.id,page||0,10,param).subscribe((acquisti:any)=>{
+    this.acquisti=acquisti
+    this.acquistiParam=param
+     })
 }
 searchBuy(){
   if(this.showAnno&&!this.showMese){

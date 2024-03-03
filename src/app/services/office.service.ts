@@ -35,8 +35,8 @@ addProdotti(prodotto:{}){
 putProdotto(prodottoId:number,prodotto:any){
   return this.http.put(environment.API_URL+this.prodotto+'/'+prodottoId,prodotto)
 }
-getAcquistoByEsercizio(esercizioId:number){
-  return this.http.get(environment.API_URL+this.acquisto+'/esercizio/'+esercizioId)
+getAcquistoByEsercizio(esercizioId:number,page?:number,size?:number,orderBy?:string){
+  return this.http.get(environment.API_URL+this.acquisto+`/esercizio/${esercizioId}?page=${page||0}&size=${size||10}&orderBy=${orderBy||'id'}`)
 }
 getClienteByEsercizio(esercizioId:number,page?:number,size?:number,orderBy?:string){
 return this.http.get(environment.API_URL+this.esercizio+`/byEsercizio/${esercizioId}?page=${page||0}&size=${size||10}&orderBy=${orderBy||'id'}`)
