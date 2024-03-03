@@ -22,6 +22,8 @@ acquisti:any[]=[]
 incasso:number=0
 clienteList:any
 clienteParam:any
+showAnno:boolean=false
+showMese:boolean=false
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
@@ -181,5 +183,8 @@ orderClienti(param:string,page?:number){
  this.clienteParam=param
  console.log(clienti)
   })
+}
+orderAcquisto(param:string){
+
 }
 }
