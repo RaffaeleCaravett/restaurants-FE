@@ -41,4 +41,12 @@ getAcquistoByEsercizio(esercizioId:number){
 getClienteByEsercizio(esercizioId:number,page?:number,size?:number,orderBy?:string){
 return this.http.get(environment.API_URL+this.esercizio+`/byEsercizio/${esercizioId}?page=${page||0}&size=${size||10}&orderBy=${orderBy||'id'}`)
 }
+getAcquistoByYear(esercizio_id:number,year:number){
+return this.http.get(environment.API_URL+this.acquisto+`/esercizioAndAnno/${esercizio_id}/${year}`)
+}
+getAcquistoByYearAndMese(esercizio_id:number,year:number,mese:number){
+  return this.http.get(environment.API_URL+this.acquisto+`/esercizioAnnoMese/${esercizio_id}/${year}/${mese}`)
+}
+
+
 }

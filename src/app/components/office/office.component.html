@@ -220,16 +220,18 @@ chosedIngredients=[]">❌</button>
   <p> Oppure cerca per :</p>
   <div>
        <label class="form-check-label" for="anno">Anno</label>
-  <input type="checkbox" class="form-check-input m-auto" id="anno" (change)="showAnno=!showAnno">
+  <input type="checkbox" class="form-check-input m-auto" id="anno" (change)="showAnno?[showAnno=false,showMese=false,mese.checked=false]:showAnno=true;" #anno>
   </div>
   <div>
 <label class="form-check-label" for="mese">Mese</label>
-  <input type="checkbox" class="form-check-input m-auto" id="mese" (change)="showMese=!showMese">
+  <input type="checkbox" class="form-check-input m-auto" id="mese" (change)="showMese=!showMese;anno.checked=true;showAnno=true" #mese>
   </div>
   <div>
-    <input type="text" class="form-control my-1" placeholder="Anno" *ngIf="showAnno">
-    <input type="text" class="form-control my-1" placeholder="Mese" *ngIf="showMese">
-    <button *ngIf="showAnno||showMese||showAnno&&showMese" class="btn">Cerca</button>
+    <form [formGroup]="buyForm">
+    <input type="text" class="form-control my-1" placeholder="Anno" *ngIf="showAnno" formControlName="anno">
+    <input type="text" class="form-control my-1" placeholder="Mese" *ngIf="showMese" formControlName="mese">
+    <button *ngIf="showAnno||showMese||showAnno&&showMese" class="btn" (click)="searchBuy()">Cerca</button>
+  </form>
   </div>
     </div>
   </div>

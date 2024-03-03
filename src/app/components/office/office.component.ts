@@ -24,6 +24,7 @@ clienteList:any
 clienteParam:any
 showAnno:boolean=false
 showMese:boolean=false
+buyForm!:FormGroup
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
@@ -54,6 +55,10 @@ this.officeService.getAllIngredienti().subscribe((ingredienti:any)=>{
   }
 })
 this.getAllProdotti()
+this.buyForm= new FormGroup({
+  anno:new FormControl(''),
+  mese:new FormControl('')
+})
 }
 
 goToOffice(){
@@ -187,4 +192,19 @@ orderClienti(param:string,page?:number){
 orderAcquisto(param:string){
 
 }
+searchBuy(){
+  if(this.showAnno&&!this.showMese){
+    this.officeService.getAcquistoByYear(this.esercizio.id,this.buyForm.controls['anno'].value).subscribe((data:any)=>{
+      console.log(data)
+      this.acquisti=data
+    })
+  }else if (this.showAnno&&this.showMese){
+    this.officeService.getAcquistoByYearAndMese(this.esercizio.id,this.buyForm.controls['anno'].value,this.buyForm.controls['mese'].value).subscribe((data:any)=>{
+      console.log(data)
+      this.acquisti=data
+    })
+  }else{
+    this.toastr.show("seleziona almeno una opzione")
+  }
+  }
 }
