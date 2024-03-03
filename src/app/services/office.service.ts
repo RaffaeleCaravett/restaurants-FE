@@ -17,6 +17,7 @@ public prodotto:string='/prodotto'
 public acquisto:string='/acquisto'
 public cliente:string='/cliente'
 public esercizio:string='/esercizio'
+public citta:string='/citta'
 
 constructor(private http:HttpClient){}
 
@@ -48,5 +49,13 @@ getAcquistoByYearAndMese(esercizio_id:number,year:number,mese:number){
   return this.http.get(environment.API_URL+this.acquisto+`/esercizioAnnoMese/${esercizio_id}/${year}/${mese}`)
 }
 
-
+getEsercizioByNome(nome:string){
+return this.http.get(environment.API_URL+this.esercizio+`/esercizioNome/${nome}`)
+}
+getEsercizioByCityAndNome(city:number,nome:string){
+  return this.http.get(environment.API_URL+this.esercizio+`/esercizio/${city}/${nome}`)
+}
+getAllCities(){
+    return this.http.get(environment.API_URL+this.citta)
+}
 }

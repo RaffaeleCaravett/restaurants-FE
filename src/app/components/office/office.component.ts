@@ -26,6 +26,9 @@ acquistiParam:any
 showAnno:boolean=false
 showMese:boolean=false
 buyForm!:FormGroup
+citta:any[]=[]
+otherBusinessesForm!:FormGroup
+otherBusinesses:any[]=[]
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
 ngOnInit(): void {
@@ -59,6 +62,15 @@ this.getAllProdotti()
 this.buyForm= new FormGroup({
   anno:new FormControl(''),
   mese:new FormControl('')
+})
+this.otherBusinessesForm=new FormGroup({
+  nome: new FormControl(''),
+  citta: new FormControl('')
+})
+this.officeService.getAllCities().subscribe((cities:any)=>{
+  if(cities){
+    this.citta=cities
+  }
 })
 }
 
@@ -209,5 +221,19 @@ searchBuy(){
   }else{
     this.toastr.show("seleziona almeno una opzione")
   }
+  }
+  findBusinesses(){
+if(this.otherBusinessesForm.controls['citta'].value==''&&this.otherBusinessesForm.controls['nome'].value){
+  this.officeService.getEsercizioByNome(this.otherBusinessesForm.controls['nome'].value).subscribe((esercizi:any)=>{
+    this.otherBusinesses=esercizi
+  })
+}else if(this.otherBusinessesForm.controls['citta'].value!=''&&this.otherBusinessesForm.controls['nome'].value){
+  this.officeService.getEsercizioByCityAndNome(this.otherBusinessesForm.controls['citta'].value,this.otherBusinessesForm.controls['nome'].value).subscribe((esercizi:any)=>{
+    this.otherBusinesses=esercizi
+  })
+}else{
+  this.otherBusinesses=[]
+  this.toastr.show("Hai appena effettuato una ricerca senza parametri")
+}
   }
 }

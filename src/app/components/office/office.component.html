@@ -239,8 +239,8 @@ chosedIngredients=[]">❌</button>
   <div *ngIf="acquisti">
     <p class="py-3" *ngFor="let a of acquisti.content">{{a.cliente.nome + " - " + a.prezzo}}</p>
     <div class="d-flex justify-content-center">
-     <button class="btn" *ngIf="acquisti.totalPages>0&&clienteList.first==false" (click)="orderClienti(clienteParam||'id',clienteList.number-1)">⬅️</button>
-     <button class="btn" *ngIf="acquisti.totalPages>0&&clienteList.last==false" (click)="orderClienti(clienteParam||'id',clienteList.number+1)">➡️</button>
+     <button class="btn" *ngIf="acquisti.totalPages>0&&acquisti.first==false" (click)="orderAcquisto(acquistiParam||'id',acquisti.number-1)">⬅️</button>
+     <button class="btn" *ngIf="acquisti.totalPages>0&&acquisti.last==false" (click)="orderAcquisto(acquistiParam||'id',acquisti.number+1)">➡️</button>
     </div>
  </div>
 </div>
@@ -257,6 +257,21 @@ chosedIngredients=[]">❌</button>
   </div>
     <p>Attualmente il tuo incasso è di {{incasso}} euro.</p>
 </div>
+        </div>
+        <div class="col-md-12 p-1">
+          <div class="p-2 bg border shadow-sm">
+            <h1>Cerca altre attività</h1>
+            <form [formGroup]="otherBusinessesForm">
+<label for="">Inserisci il nome :</label>
+<input type="text" class="form-control w-50 m-auto" formControlName="nome">
+<label for="">Scegli la città</label>
+<select class="form-select w-50 m-auto" formControlName="citta">
+  <option value=""></option>
+  <option value="{{c.id}}" *ngFor="let c of citta">{{c.nome}}</option>
+</select>
+<button class="btn my-1" type="button" (click)="findBusinesses()">Cerca</button>
+</form>
+          </div>
         </div>
       </div>
     </div>

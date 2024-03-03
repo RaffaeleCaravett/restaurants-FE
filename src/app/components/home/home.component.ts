@@ -1,4 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/core/auth.guard';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +15,9 @@ export class HomeComponent implements OnInit{
   image4 = 'https://coryrylan.com/assets/images/posts/types/stenciljs.png'
   images:any[]=[]
   title:string[]=['O','R','D','E','R','S','A','P','P']
+
+  constructor(private authGuard:AuthGuard,private router:Router){}
+
    ngOnInit(): void {
 
   this.images = [this.image1, this.image2, this.image3, this.image4];
@@ -117,6 +123,14 @@ if(i>index+1){
     d.style.transform=`translateX(${windowSize/100*3}px)`
   }
 }
+  }
+}
+
+goToLogin(){
+  if(this.authGuard.isAuthenticated==true){
+this.router.navigate(['/office'])
+  }else{
+    this.router.navigate(['/forms'])
   }
 }
 }
