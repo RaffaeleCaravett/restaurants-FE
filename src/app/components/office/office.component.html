@@ -251,13 +251,7 @@ chosedIngredients=[]">❌</button>
         <div class="col-md-4 p-1 first-col-md-4">
 <div class="p-2 bg border shadow-sm">
   <h2>Incasso :</h2>
-  <div class="row">
-    Oridna per :
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-  </div>
+
     <p>Attualmente il tuo incasso è di {{incasso}} euro.</p>
 </div>
         </div>
@@ -274,6 +268,16 @@ chosedIngredients=[]">❌</button>
 </select>
 <button class="btn my-1" type="button" (click)="findBusinesses()">Cerca</button>
 </form>
+<div class="p-1 row" *ngFor="let ob of otherBusinesses">
+<div class="col-md-4 p-1">
+<img src="{{ob.immagine_profilo}}" alt="" class="w-100">
+</div>
+<div class="col-md-8 p-1">
+<h2>{{ob.id + " - " + ob.nome}}</h2>
+<p>{{ob.email + " - " + ob.tipoEsercizio}}</p>
+<p>{{ob.indirizzo + " - " + ob.citta.nome}}</p>
+</div>
+</div>
           </div>
         </div>
       </div>

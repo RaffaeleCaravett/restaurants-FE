@@ -10,7 +10,7 @@ import { OfficeService } from 'src/app/services/office.service';
   styleUrls: ['./office.component.scss']
 })
 export class OfficeComponent implements AfterViewInit {
-office:boolean=false
+office:boolean=true
 esercizio:any
 prodottoForm!:FormGroup
 tipoProdotto:string[]=['ANTIPASTO','PRIMO','SECONDO','PIZZA_BIANCA','PIZZA_ROSSA','DOLCE','BIBITA']
