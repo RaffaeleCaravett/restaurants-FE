@@ -58,4 +58,10 @@ getEsercizioByCityAndNome(city:number,nome:string){
 getAllCities(){
     return this.http.get(environment.API_URL+this.citta)
 }
+updateEsercizioImg(esercizio_id:number, file:any){
+  console.log('ihih')
+  const formData: FormData = new FormData();
+      formData.append('file', file);
+return this.http.put(environment.API_URL+this.esercizio+'/image/'+esercizio_id,formData)
+}
 }

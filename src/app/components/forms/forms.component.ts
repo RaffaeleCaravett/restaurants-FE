@@ -71,7 +71,12 @@ if(this.loginForm.valid){
       localStorage.setItem('accessToken',tokens.tokens.accessToken)
       localStorage.setItem('refreshToken',tokens.tokens.refreshToken)
       this.authService.authenticateUser(true)
-      this.router.navigate(['/office'])
+       this.authService.verifyEsecizioToken(this.authService.token).subscribe((esercizio:any)=>{
+        if(esercizio){
+          localStorage.setItem('restaurant',JSON.stringify(esercizio))
+          this.router.navigate(['/office'])
+        }
+       })
     }
   },
   error:(error)=>{

@@ -10,12 +10,14 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './core/auth.guard';
 import { TokenInterceptor } from './core/token.interceptor';
+import { ModifyEsercizioComponent } from './components/modify-esercizio/modify-esercizio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    ModifyEsercizioComponent
   ],
   imports: [
     BrowserModule,
